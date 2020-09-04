@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { homeRoute, personsRoute, studyRoute, teamsRoute } from 'src/app/models/constants/routes';
+import { ConfigService } from 'src/app/services/config.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header',
@@ -12,14 +14,16 @@ export class HeaderComponent implements OnInit {
   isHome: boolean;
   homeRoute = homeRoute;
   personsRoute = personsRoute;
-  studyRoute = studyRoute;
   teamsRoute = teamsRoute;
+  studyRoute = studyRoute;
 
   sideBarVisible = false;
 
-  constructor() { }
+  constructor(public config: ConfigService, public router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.isHome = this.router.url === this.homeRoute;
+    this.hideOptions = this.config.mobile || this.config.smallDesktop;
   }
 
 }

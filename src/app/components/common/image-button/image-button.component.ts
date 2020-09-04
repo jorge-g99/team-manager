@@ -13,7 +13,7 @@ export class ImageButtonComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

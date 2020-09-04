@@ -11,7 +11,7 @@ export class ConfigService {
   mobile: boolean = this.screenWidth <= this.MOBILE_MAX_WIDTH;
   smallDesktop: boolean = this.screenWidth <= this.SMALL_DESKTOP;
 
-  constructor() { 
+  constructor() {
     window.addEventListener('resize', (event) => {
       this.screenWidth = window.innerWidth;
       this.mobile = this.screenWidth <= this.MOBILE_MAX_WIDTH;
