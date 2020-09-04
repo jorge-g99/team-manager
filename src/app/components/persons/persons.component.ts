@@ -5,6 +5,8 @@ import { ModuleUtilsService } from 'src/app/services/module-utils.service';
 import { locations } from 'src/app/models/enums/locations';
 import { skills } from 'src/app/models/enums/skills';
 import { ConfigService } from 'src/app/services/config.service';
+import { ToastComponent } from '../common/toast/toast.component';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-persons',
@@ -27,7 +29,7 @@ export class PersonsComponent extends ModuleUtilsService implements OnInit {
   showRegister = false;
   showEdit = false;
 
-  constructor(public config: ConfigService) { super(); }
+  constructor(public config: ConfigService, private toast: ToastComponent, private confirmationService: ConfirmationService) { super(); }
 
   ngOnInit() {
     this.getPersons();
@@ -71,10 +73,12 @@ export class PersonsComponent extends ModuleUtilsService implements OnInit {
       console.log(this.person.id);
       this.personList.push(this.person);
       this.showRegister = false;
+      this.toast.openToast('success', 'Pessoa Cadastrada com sucesso');
     } else {
       const personIndex = this.personList.findIndex(p => p.id === this.person.id);
       this.personList[personIndex] = this.person;
       this.showEdit = false;
+      this.toast.openToast('success', 'Pessoa Editada com sucesso');
     }
     localStorage.setItem('persons', JSON.stringify(this.personList));
     this.getPersons();
@@ -97,5 +101,23 @@ export class PersonsComponent extends ModuleUtilsService implements OnInit {
         this.personSkills.push(skills);
       });
     }
+  }
+
+  delete() {
+    this.confirmationService.confirm({
+      message: `Você tem certeza que deseja excluir ${this.person.name}?`,
+      header: 'Confirmar',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        const personIndex = this.personList.findIndex(p => p.id === this.person.id);
+        this.personList.splice(personIndex, 1);
+        this.toast.openToast('success', 'Pessoa Excluída com sucesso');
+        localStorage.setItem('persons', JSON.stringify(this.personList));
+        this.cancel();
+        this.getPersons();
+      }
+    });
   }
 }
