@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { homeRoute, personsRoute, teamsRoute, studyRoute } from 'src/app/models/constants/routes';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  homeRoute = homeRoute;
+  personRoute = personsRoute;
+  teamsRoute = teamsRoute;
+  studyRoute = studyRoute;
 
   constructor() { }
 

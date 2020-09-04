@@ -1,0 +1,20 @@
+<header></header>
+<div class="vsg-container">
+    <div class="module-title text-left">Área de Estudos:</div>
+    <div class="module-subtitle text-left">Aqui você encontrará conteúdo sobre diversos temas, 
+        para auxiliar no seudesenvolvimento profissional
+    </div>
+    <p-accordion [multiple]= "true">
+        <p-accordionTab *ngFor= "let study of studies" [header]= "study.titulo">
+            <div class="module-subtitle text-left">
+                {{study.subtitulo}}
+            </div>
+            <div class="mb-3">
+                {{study.conteudo}}
+            </div>
+            <ul *ngIf= "study.referencias">
+                <li *ngFor= "let reference of study.referencias">{{reference[0]}}:&nbsp;<a [href]= "reference[1]">{{reference[1]}}</a></li>
+            </ul>
+        </p-accordionTab>
+    </p-accordion>
+</div>

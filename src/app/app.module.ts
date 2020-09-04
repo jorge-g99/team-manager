@@ -20,6 +20,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastComponent } from './components/common/toast/toast.component';
 import { ToastModule } from 'primeng/toast';
 import { ConfigService } from './services/config.service';
+import { StudiesComponent } from './components/studies/studies.component';
+import { AccordionModule } from 'primeng/accordion';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { ConfigService } from './services/config.service';
     ImageButtonComponent,
     PersonsComponent,
     HeaderComponent,
-    ToastComponent
+    ToastComponent,
+    StudiesComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,9 @@ import { ConfigService } from './services/config.service';
     MultiSelectModule,
     TableModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    AccordionModule,
+    HttpClientModule
   ],
   providers: [ConfigService, ConfirmationService, MessageService, ToastComponent],
   bootstrap: [AppComponent]
